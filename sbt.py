@@ -10,6 +10,9 @@ class Player:
       self.message = None
       self.opponent = None
 
+async def health_check(path, request_headers):
+    if path == "/healthz":
+        return http.HTTPStatus.OK, [], b"OK\n"
 
 async def relay(ws):
    global waiting_player
@@ -40,7 +43,7 @@ async def relay(ws):
 
 
 async def main():
-   async with serve(relay, "", 8080):
+   async with serve(relay, "", 8080, process_request=health_check):
       await asyncio.get_running_loop().create_future()  # run forever
 
 if __name__ == "__main__":
