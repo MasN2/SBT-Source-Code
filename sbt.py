@@ -40,7 +40,7 @@ async def relay(ws):
 
 
 async def main():
-   async with serve(relay, "localhost", 8888):
+   async with serve(relay, "", 8080):
       await asyncio.get_running_loop().create_future()  # run forever
 
 if __name__ == "__main__":
